@@ -623,6 +623,23 @@
         sendSound.play().catch(e=>console.log("audio error", e));
         
         updateMemoryFromText(text);
+
+// MEMORY EMOSI USER
+if (text.includes("capek")) {
+  smallMemory.lastEmotion = "capek";
+}
+
+if (text.includes("sedih")) {
+  smallMemory.lastEmotion = "sedih";
+}
+
+if (text.includes("senang") || text.includes("bahagia")) {
+  smallMemory.lastEmotion = "senang";
+}
+
+if (text.includes("marah") || text.includes("kesel")) {
+  smallMemory.lastEmotion = "kesel";
+}
         
         const now = new Date();
         const newMsg = {
@@ -668,6 +685,8 @@ info user:
 - mood terakhir: ${userMemory.mood}
 - topik terakhir: ${userMemory.lastTopic}
 - ignoreCount: ${ignoreCount}
+- mood kamu sekarang: ${currentMood}
+- kondisi terakhir user: ${smallMemory.lastEmotion}
 
 gaya chat:
 - huruf kecil semua
@@ -1006,6 +1025,26 @@ Jangan terlalu panjang.`;
     }
     
     init();
+
+const randomChat = [
+  "kamu lagi apa",
+  "tadi kepikiran kamu",
+  "kok sepi sih",
+  "aku ganggu gak",
+  "daniel...",
+  "ih kamu kemana aja",
+  "aku kangen dikit sih"
+];
+
+function autoMessage() {
+  if (Math.random() < 0.3) { // 30% chance
+    const msg = randomChat[Math.floor(Math.random() * randomChat.length)];
+    sendMessage(msg);
+  }
+}
+
+setInterval(autoMessage, 60000);
+
 </script>
 </body>
 </html>
